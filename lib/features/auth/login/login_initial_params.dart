@@ -1,0 +1,3 @@
+class LoginInitialParams {
+  const LoginInitialParams();
+}

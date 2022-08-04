@@ -5,6 +5,7 @@ import 'package:flutter_demo/navigation/app_navigator.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../features/app_init/mocks/app_init_mocks.dart';
+import '../features/auth/mocks/auth_mocks.dart';
 //DO-NOT-REMOVE IMPORTS_MOCKS
 
 import 'mock_definitions.dart';
@@ -34,6 +35,7 @@ class Mocks {
 
   static void init() {
     AppInitMocks.init();
+    AuthMocks.init();
 //DO-NOT-REMOVE FEATURE_MOCKS_INIT
 
     _initMocks();
