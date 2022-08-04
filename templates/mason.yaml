@@ -1,0 +1,7 @@
+bricks:
+  use_case:
+    path: use_case
+  page:
+    path: page
+  repository:
+    path: repository

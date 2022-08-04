@@ -1,0 +1,13 @@
+name: page_hooks
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  template_utils:
+    git:
+      url: https://github.com/andrzejchm/flutter-app-showcase.git
+      path: templates/template_utils
+      ref: main
+  mason: any
+  recase: 4.0.0

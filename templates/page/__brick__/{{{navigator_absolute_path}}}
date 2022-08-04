@@ -1,0 +1,23 @@
+import 'package:{{{app_package}}}/dependency_injection/app_component.dart';
+import 'package:{{{app_package}}}/{{{import_path}}}/{{{initial_params_file_name}}}';
+import 'package:{{{app_package}}}/{{{import_path}}}/{{{page_file_name}}}';
+import 'package:{{{app_package}}}/navigation/app_navigator.dart';
+import 'package:{{{app_package}}}/navigation/no_routes.dart';
+
+class {{navigator_name}} with NoRoutes {
+
+  {{navigator_name}}(this.appNavigator);
+
+  @override
+  final AppNavigator appNavigator;
+}
+
+mixin {{route_name}} {
+  Future<void> open{{stem}}({{initial_params_name}} initialParams) async {
+    return appNavigator.push(
+      materialRoute(getIt<{{page_name}}>(param1: initialParams)),
+    );
+  }
+
+  AppNavigator get appNavigator;
+}

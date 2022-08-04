@@ -1,0 +1,31 @@
+// ignore: unused_import
+import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:{{{app_package}}}/core/utils/mvp_extensions.dart';
+import 'package:{{{app_package}}}/{{{import_path}}}/{{{presentation_model_file_name}}}';
+import 'package:{{{app_package}}}/{{{import_path}}}/{{{presenter_file_name}}}';
+
+class {{page_name}} extends StatefulWidget with HasPresenter<{{presenter_name}}> {
+
+  const {{page_name}}({
+    required this.presenter,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  final {{presenter_name}} presenter;
+
+  @override
+  State<{{page_name}}> createState() => _{{page_name}}State();
+}
+
+class _{{page_name}}State extends State<{{page_name}}> with PresenterStateMixin<{{view_model_name}}, {{presenter_name}}, {{page_name}}> {
+
+  @override
+  Widget build(BuildContext context) => const Scaffold(
+      body: Center(
+        child: Text("{{page_name}}\n(NOT IMPLEMENTED YET)"),
+      ),
+    );
+
+}

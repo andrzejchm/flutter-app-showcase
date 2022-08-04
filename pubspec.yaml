@@ -1,0 +1,65 @@
+name: flutter_demo
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # architecture
+  bloc: 8.0.3
+  flutter_bloc: 8.0.1
+
+  # dependency injection
+  get_it: 7.2.0
+
+  # functional programming, used for Either type
+  dartz: 0.10.1
+
+  # equality checks
+  equatable: 2.0.3
+
+  # localization
+  intl: 0.17.0
+
+  # widgets
+  gap: 2.0.0
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # code analysis
+  lint: 1.10.0
+  dart_code_metrics: 4.17.0
+
+  # tests
+  golden_toolkit: 0.13.0
+  alchemist: 0.4.1
+  mocktail_image_network: 0.3.1
+  mocktail: 0.3.0
+  bloc_test: 9.0.3
+
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  assets:
+    - assets/
+    - assets/images/
+
+flutter_gen:
+  output: lib/resources/
+  line_length: 120
+
+flutter_intl:
+  enabled: true

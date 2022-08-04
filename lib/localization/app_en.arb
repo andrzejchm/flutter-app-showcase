@@ -1,0 +1,7 @@
+{
+  "@@locale": "en",
+  "appTitle": "Flutter Demo",
+  "okAction": "Ok",
+  "commonErrorTitle": "Error",
+  "commonErrorMessage": "Something went wrong, please try again"
+}
