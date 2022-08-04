@@ -14,6 +14,8 @@ class AuthMocks {
 
   // USE CASES
 
+  static late MockLogInFailure logInFailure;
+  static late MockLogInUseCase logInUseCase;
   //DO-NOT-REMOVE USE_CASE_MOCKS_STATIC_FIELD
 
   // REPOSITORIES
@@ -38,6 +40,8 @@ class AuthMocks {
     //DO-NOT-REMOVE MVP_INIT_MOCKS
 
     // USE CASES
+    logInFailure = MockLogInFailure();
+    logInUseCase = MockLogInUseCase();
     //DO-NOT-REMOVE USE_CASE_INIT_MOCKS
 
     // REPOSITORIES
@@ -57,6 +61,8 @@ class AuthMocks {
     //DO-NOT-REMOVE MVP_MOCK_FALLBACK_VALUE
 
     // USE CASES
+    registerFallbackValue(MockLogInFailure());
+    registerFallbackValue(MockLogInUseCase());
     //DO-NOT-REMOVE USE_CASE_MOCK_FALLBACK_VALUE
 
     // REPOSITORIES

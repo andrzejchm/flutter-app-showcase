@@ -3,5 +3,7 @@
   "appTitle": "Flutter Demo",
   "okAction": "Ok",
   "commonErrorTitle": "Error",
-  "commonErrorMessage": "Something went wrong, please try again"
+  "commonErrorMessage": "Something went wrong, please try again",
+  "missingCredsTitle": "Missing Credentials",
+  "missingCredsMessage": "Please provide both username and password!"
 }
