@@ -22,6 +22,9 @@ class AppInitPresentationModel implements AppInitViewModel {
   final FutureResult<Either<AppInitFailure, Unit>> appInitResult;
   final User user;
 
+  @override
+  bool get isLoading => appInitResult.isPending();
+
   AppInitPresentationModel copyWith({
     FutureResult<Either<AppInitFailure, Unit>>? appInitResult,
     User? user,
@@ -33,4 +36,6 @@ class AppInitPresentationModel implements AppInitViewModel {
 }
 
 /// Interface to expose fields used by the view (page).
-abstract class AppInitViewModel {}
+abstract class AppInitViewModel {
+  bool get isLoading;
+}

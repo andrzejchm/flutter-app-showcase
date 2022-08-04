@@ -29,8 +29,15 @@ class _AppInitPageState extends State<AppInitPage>
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        body: Center(
-          child: Assets.images.logo.image(),
+        body: stateObserver(
+          builder: (context, state) => Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Center(child: Assets.images.logo.image()),
+              const SizedBox(height: 16),
+              if (state.isLoading) const CircularProgressIndicator(),
+            ],
+          ),
         ),
       );
 }
