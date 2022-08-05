@@ -8,6 +8,7 @@ class AppInitUseCase {
 
   Future<Either<AppInitFailure, Unit>> execute() async {
     // TODO add app initialization code here, like loading user data from local storage etc.
+    await Future.delayed(const Duration(seconds: 2));
     return success(unit);
   }
 }

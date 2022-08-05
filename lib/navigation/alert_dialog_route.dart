@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_demo/localization/app_localizations_utils.dart';
 import 'package:flutter_demo/navigation/app_navigator.dart';
 
+//ignore: unused-code
 mixin AlertDialogRoute {
   Future<void> showAlert({
     required String title,
