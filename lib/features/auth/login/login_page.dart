@@ -1,11 +1,11 @@
 // ignore: unused_import
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/core/helpers.dart';
 import 'package:flutter_demo/core/utils/mvp_extensions.dart';
 import 'package:flutter_demo/features/auth/login/login_presentation_model.dart';
 import 'package:flutter_demo/features/auth/login/login_presenter.dart';
 import 'package:flutter_demo/localization/app_localizations_utils.dart';
+import 'package:flutter_demo/utils/dimensions.dart';
 
 class LoginPage extends StatefulWidget with HasPresenter<LoginPresenter> {
   const LoginPage({
@@ -20,36 +20,53 @@ class LoginPage extends StatefulWidget with HasPresenter<LoginPresenter> {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> with PresenterStateMixin<LoginViewModel, LoginPresenter, LoginPage> {
+class _LoginPageState extends State<LoginPage>
+    with PresenterStateMixin<LoginViewModel, LoginPresenter, LoginPage> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(32.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextField(
-                decoration: InputDecoration(
-                  hintText: appLocalizations.usernameHint,
+        body: stateObserver(
+          builder: (context, state) => Padding(
+            padding: const EdgeInsets.all(
+              Dimensions.PADDING_32,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: appLocalizations.usernameHint,
+                  ),
+                  onChanged: (username) => presenter.usernameChanged(username),
                 ),
-                onChanged: (text) => doNothing(), //TODO
-              ),
-              const SizedBox(height: 8),
-              TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  hintText: appLocalizations.passwordHint,
+                const SizedBox(
+                  height: Dimensions.ITEM_HEIGHT_8,
                 ),
-                onChanged: (text) => doNothing(), //TODO
-              ),
-              const SizedBox(height: 16),
-              stateObserver(
-                builder: (context, state) => ElevatedButton(
-                  onPressed: () => doNothing(), //TODO
-                  child: Text(appLocalizations.logInAction),
+                TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    hintText: appLocalizations.passwordHint,
+                  ),
+                  onChanged: (password) => presenter.passwordChanged(password),
                 ),
-              ),
-            ],
+                const SizedBox(
+                  height: Dimensions.ITEM_HEIGHT_16,
+                ),
+                stateObserver(
+                  builder: (context, state) => state.ifValid
+                      ? ElevatedButton(
+                          onPressed: () => presenter.login(),
+                          child: Text(appLocalizations.logInAction),
+                        )
+                      : const SizedBox.shrink(),
+                ),
+                if (state.isLoading) const CircularProgressIndicator(),
+              ],
+            ),
           ),
         ),
       );
