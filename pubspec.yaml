@@ -40,6 +40,13 @@ dev_dependencies:
   # code analysis
   lint: 1.10.0
   dart_code_metrics: 4.17.0
+  custom_lint:
+    git:
+      url: https://github.com/andrzejchm/dart_custom_lint.git
+      path: packages/custom_lint
+      ref: picnic
+  clean_architecture_lints:
+    path: tools/custom_lints/clean_architecture_lints
 
   # tests
   golden_toolkit: 0.13.0
@@ -47,6 +54,8 @@ dev_dependencies:
   mocktail_image_network: 0.3.1
   mocktail: 0.3.0
   bloc_test: 9.0.3
+
+
 
 
 flutter:

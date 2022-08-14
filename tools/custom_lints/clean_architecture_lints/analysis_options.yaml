@@ -3,18 +3,8 @@ include: package:lint/analysis_options.yaml
 analyzer:
   plugins:
     - dart_code_metrics
-    - custom_lint
-  exclude:
-    - "lib/**/*.g.dart"
-    - "lib/**/*.freezed.dart"
-    - "lib/**/*.gql.dart"
-    - "lib/generated/**/*.dart"
-    - "lib/generated/*.dart"
-    - "build/**"
-    - "lib/**.gr.dart"
-    - "lib/**.config.dart"
-    - "templates/**"
 
+  exclude:
 
   language:
     strict-raw-types: true
@@ -144,7 +134,7 @@ dart_code_metrics:
     - long-method
     - long-parameter-list
   metrics:
-    cyclomatic-complexity: 10
+    cyclomatic-complexity: 15
     maximum-nesting-level: 3
     number-of-parameters: 4
     source-lines-of-code: 30

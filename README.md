@@ -15,38 +15,47 @@
 Flutter project for the Demo architecture
 
 <!-- TOC -->
-* [Flutter architecture demo](#flutter-architecture-demo)
-  * [Setup](#setup)
-  * [Architecture](#architecture)
-    * [UI](#ui)
-    * [Presentation](#presentation)
-    * [Domain](#domain)
-    * [Data](#data)
-    * [Navigation](#navigation)
-      * [Navigator](#navigator)
-      * [Route](#route)
-      * [AppNavigator class](#appnavigator-class)
-    * [Example](#example)
-  * [Code best practices & guidelines](#code-best-practices--guidelines)
-    * [Pull Requests checklist](#pull-requests-checklist)
-    * [General](#general)
-    * [UseCase](#usecase)
-    * [Repository](#repository)
-    * [Failures](#failures)
-      * [Example](#example)
-    * [Domain entity](#domain-entity)
-      * [Example](#example)
-    * [Presenter](#presenter)
-    * [ViewModel](#viewmodel)
-    * [PresentationModel](#presentationmodel)
-    * [Page](#page)
-    * [Json classes](#json-classes)
-      * [Example](#example)
-  * [Collaborating guidelines](#collaborating-guidelines)
-    * [Code templates](#code-templates)
-      * [Mason commands](#mason-commands)
-    * [New libraries](#new-libraries)
+
+- [Flutter architecture demo](#flutter-architecture-demo)
+    - [Setup](#setup)
+    - [Architecture](#architecture)
+        - [UI](#ui)
+        - [Presentation](#presentation)
+        - [Domain](#domain)
+        - [Data](#data)
+        - [Navigation](#navigation)
+            - [Navigator](#navigator)
+            - [Route](#route)
+            - [AppNavigator class](#appnavigator-class)
+        - [Example](#example)
+    - [Tools](#tools)
+        - [FVM](#fvm)
+        - [Code templates](#code-templates)
+            - [Mason commands](#mason-commands)
+        - [Custom lints](#custom-lints)
+        - [Fluttergen](#fluttergen)
+        - [Dart code metrics](#dart-code-metrics)
+        - [Fastlane](#fastlane)
+    - [Code best practices & guidelines](#code-best-practices--guidelines)
+        - [Pull Requests checklist](#pull-requests-checklist)
+        - [General](#general)
+        - [UseCase](#usecase)
+        - [Repository](#repository)
+        - [Failures](#failures)
+            - [Example](#example)
+        - [Domain entity](#domain-entity)
+            - [Example](#example)
+        - [Presenter](#presenter)
+        - [ViewModel](#viewmodel)
+        - [PresentationModel](#presentationmodel)
+        - [Page](#page)
+        - [Json classes](#json-classes)
+            - [Example](#example)
+    - [Collaborating guidelines](#collaborating-guidelines)
+        - [New libraries](#new-libraries)
+
 <!-- TOC -->
+
 ## Setup
 
 1. Install [flutter_gen](https://pub.dev/packages/flutter_gen) in your system and run:
@@ -55,7 +64,13 @@ Flutter project for the Demo architecture
    flutter_gen -c pubspec.yaml
    ```  
 
-2. Run
+2. Install git hooks (optional)
+
+   ```bash  
+   ./scripts/install-git-hooks.sh  
+   ```  
+
+3. Run
 
    ```bash  
    make check  
@@ -63,11 +78,11 @@ Flutter project for the Demo architecture
 
 This command comes useful when you want to make sure your code is clean and ready to be code-reviewed. it does the following:
 
- - runs [flutter_gen](https://pub.dev/packages/flutter_gen)
- - formats your code
- - runs `flutter analyze`
- - runs unit tests and recreates all golden test screenshot files
- - runs [dart_code_metrics](https://pub.dev/packages/dart_code_metrics) checks
+- runs [flutter_gen](https://pub.dev/packages/flutter_gen)
+- formats your code
+- runs `flutter analyze`
+- runs unit tests and recreates all golden test screenshot files
+- runs [dart_code_metrics](https://pub.dev/packages/dart_code_metrics) checks
 
 ## Architecture
 
@@ -160,13 +175,13 @@ mixin DashboardRoute {
 it specifies the the `openDashboard` method that now can be used on the `LoginNavigator` in order to open DashboardPage. It uses
 `appNavigator` under the hood that is a wrapper around Flutter navigation that streamlines navigation, more on `AppNavigator` below.
 
-The takeaway from this is that Routes specify how given pages are opened, while Navigators gather those routes together and expose them to 
+The takeaway from this is that Routes specify how given pages are opened, while Navigators gather those routes together and expose them to
 the caller by mixing them in.
 
 #### AppNavigator class
 
 `AppNavigator` is a wrapper around Flutter navigation that allows us to perform navigation without the need of providing `BuildContext`
-by default, it will use `MaterialApp`'s root navigator unless you provide `BuildContext` explicitly in order to use nested navigation 
+by default, it will use `MaterialApp`'s root navigator unless you provide `BuildContext` explicitly in order to use nested navigation
 through an embeded `Navigator` widget from the flutter's SDK.
 
 ### Example
@@ -175,24 +190,107 @@ Below you can find a diagram showing the flow of control for a basic scenario of
 
 ![example diagram](docs/example.png)
 
+## Tools
+
+Here is a list of different tools we use in the project that augment and help with our day-to-day jobs
+
+### FVM
+
+In order to keep consistent version of flutter and dart for all developers in the team, we use [fvm](https://fvm.app/) which is flutter
+version manager. we have a config commited to this repository under the [.fvm/fvm_config.json](.fvm/fvm_config.json) file specifying
+exact version of flutter to use. After you install fvm on your machine, you can issue this command in the root directory to install
+proper flutter version:
+
+```bash
+fvm install
+```
+
+### Code templates
+
+This repository host few useful file templates created with [Mason](https://github.com/felangel/mason). You can find
+them in the `templates` subdirectory. In order to use those,
+install [Mason (INSTRUCTIONS HERE)](https://github.com/felangel/mason/tree/master/packages/mason_cli#installation)
+
+#### Mason commands
+
+| 🔴**NOTE**🔴                                                               |  
+|----------------------------------------------------------------------------|  
+| **You have to run following commands from the `templates` subdirectory!**  |
+
+First, run `mason get` to install all the templates locally!
+
+| command           | description                                  |  
+|-------------------|----------------------------------------------|  
+| `mason get`       | installs all templates on your local machine |  
+| `mason list`      | shows the list of available templates        |  
+| `mason make page` | executes the `page` template                 |
+
+### Custom lints
+
+We host a set of our own custom lints inside the `tools/custom_lints/` folder. those are written using the
+[custom_lint](https://pub.dev/packages/custom_lint) package. to run the lints, you have to run the following command:
+
+```bash
+ fvm flutter pub run custom_lint
+```
+
+you can find the list of all the lints inside the [custom_lint.dart](tools/custom_lints/clean_architecture_lints/bin/custom_lint.dart)
+
+### Fluttergen
+
+We use [Fluttergen](https://pub.dev/packages/flutter_gen) to properly generate index files for our assets, this way all the paths are saved into constants and you don't have
+to remembember about updating them or type them in manually whenever you need to use an asset.
+
+after you install it in your system, you can run the following command:
+
+```bash 
+fluttergen -c pubspec.yaml
+```
+
+in the root of project to generate `Assets.gen.dart` files and others.
+
+### Dart code metrics
+
+[dart code metrics Docs](https://dartcodemetrics.dev/docs/getting-started/introduction)
+
+[Dart_code_metrics](https://pub.dev/packages/dart_code_metrics) is a library hosting bunch of additional custom lints.
+
+We use the following commands to run it, (but please refer to [Makefile](Makefile) for up-to-date list of commands)
+
+```bash
+fvm flutter pub run dart_code_metrics:metrics analyze lib --set-exit-on-violation-level=warning --fatal-style --fatal-performance --fatal-warnings
+fvm flutter pub run dart_code_metrics:metrics check-unused-code . --fatal-unused
+fvm flutter pub run dart_code_metrics:metrics check-unused-files . --fatal-unused --exclude="{templates/**,.dart_tool/**,lib/generated/**}"
+```
+
+### Fastlane
+
+[Fastlane Docs](https://fastlane.tools/)
+
+we use fastlane for various tasks inside `ios` and `android` subfolders. Both platforms reuse a lot of code by referencing the
+scripts inside `tools/fastlane` folder. To understand more about what can be done with Fastlane, have a look at their respective READMEs:
+
+- [iOS fastlane README](ios/fastlane/README.md)
+- [Android fastlane README](android/fastlane/README.md)
+
 ## Code best practices & guidelines
 
 ### Pull Requests checklist
 
-| Rule                                                                           | Explanation                                                                                                                                                                                                                                                                  |
-|--------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add proper prefix to the PR title (`feat:`, `fix:`, `chore:`, `refactor:`)** | [Link](https://www.conventionalcommits.org/en/v1.0.0/)                                                                                                                                                                                                                       |
-| **Review your own PR first**                                                   | Reading trough your own pr helps spot obvious errors and it saves time for the reviewer                                                                                                                                                                                      |
-| **Make sure all CI checks pass**                                               | CI is meant to catch formatting and lint errors, make use of that and don't force others to do the machine's job :)                                                                                                                                                          |
-| **Run the app and test it yourself**                                           | Before reviewing a PR or when issuing your own code, make sure to run the app and test it making sure the code doesn't break anything and works correctly                                                                                                                    |
-| **Don't be afraid to ask questions**                                           | Code review is meant not only to find errors in someone's code, but it's also about making sure you understand the code and know what is going on. Don't be afraid to ask questions, if anything looks unclear to you, don't assume that it's your fault, ask a question! :) |
+| Rule                                                           | Explanation                                                                                                                                                                                                                                                                  |
+|----------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add proper prefix to the PR title (`feat:`, `fix:`, `chore:` , `refactor:`)**                                               | [Link](https://www.conventionalcommits.org/en/v1.0.0/)                                                                                                                                                                                                                       |
+| **Review your own PR first**                                   | Reading trough your own pr helps spot obvious errors and it saves time for the reviewer                                                                                                                                                                                      |
+| **Make sure all CI checks pass**                               | CI is meant to catch formatting and lint errors, make use of that and don't force others to do the machine's job :)                                                                                                                                                          |
+| **Run the app and test it yourself**                           | Before reviewing a PR or when issuing your own code, make sure to run the app and test it making sure the code doesn't break anything and works correctly                                                                                                                    |
+| **Don't be afraid to ask questions**                           | Code review is meant not only to find errors in someone's code, but it's also about making sure you understand the code and know what is going on. Don't be afraid to ask questions, if anything looks unclear to you, don't assume that it's your fault, ask a question! :) |
 
 ### General
 
 | Rule                                                                      | Explanation                                                                                                                                                                                                      |
 |---------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Use trailing commas for method/constructor parameters anddefinitions** | This way each param is in a separate line and adding new params is much easier to read in PRs                                                                                                                    |
-| **Prefer namedparameters**                                                | Whenever using more than one param, consider using named parameters, i.e: <font color="Red">Bad:</font>`getBalances(true,"1283184")`, <font color="Green">Bad:</font>`getBalances(id: "1283184", refresh: true)` |
+| **Use trailing commas for method/constructor parameters and definitions** | This way each param is in a separate line and adding new params is much easier to read in PRs                                                                                                                    |
+| **Prefer named parameters**                                               | Whenever using more than one param, consider using named parameters, i.e: <font color="Red">Bad:</font>`getBalances(true,"1283184")`, <font color="Green">Bad:</font>`getBalances(id: "1283184", refresh: true)` |
 
 ### UseCase
 
@@ -360,26 +458,6 @@ class UserJson {
 ## Collaborating guidelines
 
 Here are few rules/thoughts to remember when working on this project
-
-### Code templates
-
-This repository host few useful file templates created with [Mason](https://github.com/felangel/mason). You can find
-them in the `templates` subdirectory. In order to use those,
-install [Mason (INSTRUCTIONS HERE)](https://github.com/felangel/mason/tree/master/packages/mason_cli#installation)
-
-#### Mason commands
-
-| 🔴**NOTE**🔴                                                               |  
-|----------------------------------------------------------------------------|  
-| **You have to run following commands from the `templates` subdirectory!**  |
-
-First, run `mason get` to install all the templates locally!
-
-| command           | description                                  |  
-|-------------------|----------------------------------------------|  
-| `mason get`       | installs all templates on your local machine |  
-| `mason list`      | shows the list of available templates        |  
-| `mason make page` | executes the `page` template                 |
 
 ### New libraries
 
