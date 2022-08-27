@@ -3,17 +3,7 @@ environment:
   sdk: '>=2.16.0 <3.0.0'
 
 dependency_overrides:
-  custom_lint:
-    git:
-      url: https://github.com/andrzejchm/dart_custom_lint.git
-      path: packages/custom_lint
-      ref: picnic
-
-  custom_lint_builder:
-    git:
-      url: https://github.com/andrzejchm/dart_custom_lint.git
-      path: packages/custom_lint_builder
-      ref: picnic
+  recase: 4.0.0
 
 dependencies:
   collection:
@@ -21,7 +11,17 @@ dependencies:
   analyzer: 4.3.1
   analyzer_plugin: 0.10.0
   # custom_lint_builder will give us tools for writing lints
-  custom_lint_builder: 0.0.9+1
+  custom_lint:
+    git:
+      url: https://github.com/andrzejchm/dart_custom_lint.git
+      path: packages/custom_lint
+      ref: main
+
+  custom_lint_builder:
+    git:
+      url: https://github.com/andrzejchm/dart_custom_lint.git
+      path: packages/custom_lint_builder
+      ref: main
 
 
 dev_dependencies:

@@ -44,7 +44,7 @@ dev_dependencies:
     git:
       url: https://github.com/andrzejchm/dart_custom_lint.git
       path: packages/custom_lint
-      ref: picnic
+      ref: main
   clean_architecture_lints:
     path: tools/custom_lints/clean_architecture_lints
 

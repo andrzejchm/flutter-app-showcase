@@ -6,8 +6,13 @@ check:
 	@fluttergen -c pubspec.yaml
 	@echo "\033[32m Formatting code... \033[0m"
 	@fvm flutter format --line-length 120 lib test
+	@echo "\033[32m Validate localization files... \033[0m"
+	@fvm dart tools/arb_files_validator/bin/arb_files_validator.dart lib/localization/
 	@echo "\033[32m Flutter analyze... \033[0m"
 	@fvm flutter analyze
+	@echo "\033[32m Flutter clean architecture lints... \033[0m"
+	@fvm flutter pub get ; pushd tools/custom_lints/clean_architecture_lints ; fvm flutter pub get ; popd
+	@fvm flutter pub run custom_lint
 	@echo "\033[32m Removing all golden files... \033[0m"
 	@find ./test -name '*.png' | xargs rm -r
 	@echo "\033[32m Flutter test --update-goldens... \033[0m"

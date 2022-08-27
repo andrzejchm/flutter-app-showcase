@@ -15,7 +15,7 @@ String packageFromUri(String? uri) {
   }
 }
 
-/// List of fields that should be part of props list for [Equatable] class
+/// List of fields that should be part of props list for Equatable class
 extension ClassElementExtensions on ClassElement {
   Iterable<FieldElement> get equatableFields =>
       fields.where((field) => !field.isStatic && !field.isAbstract && (field.getter?.isSynthetic ?? false));
@@ -80,6 +80,8 @@ extension LibraryElementExtensions on Element {
       };
 
   bool get isDomainEntityFile => library?.source.fullName.contains("domain/model") ?? false;
+
+  bool get isFailureFile => library?.source.shortName.endsWith("failure.dart") ?? false;
 
   List<ClassElement> get domainEntitiesClasses =>
       library?.topLevelElements //

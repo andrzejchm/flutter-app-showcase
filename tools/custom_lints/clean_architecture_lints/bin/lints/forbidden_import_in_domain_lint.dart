@@ -19,6 +19,9 @@ class ForbiddenImportInDomainLint extends PluginBase {
     "/data/",
     "/widgets/",
     "/ui/",
+    "presenter.dart",
+    "presentation_model.dart",
+    "page.dart",
   ];
 
   @override

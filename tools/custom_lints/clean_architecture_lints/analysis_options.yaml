@@ -3,7 +3,7 @@ include: package:lint/analysis_options.yaml
 analyzer:
   plugins:
     - dart_code_metrics
-
+    - custom_lint
   exclude:
 
   language:

@@ -1,4 +1,4 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:bloc/bloc.dart';
 import 'package:flutter_demo/core/domain/model/user.dart';
 
 class UserStore extends Cubit<User> {

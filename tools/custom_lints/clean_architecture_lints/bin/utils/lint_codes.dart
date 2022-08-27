@@ -10,4 +10,8 @@ class LintCodes {
   static const emptyConstructorContainsParams = 'empty_constructor_contains_params';
   static const publicFieldInUseCase = 'public_field_in_use_case';
   static const publicMethodInUseCase = 'public_method_in_use_case';
+  static const tooManyPublicMembers = 'too_many_public_members';
+  static const tooManyPageElements = 'too_many_page_file_members';
+  static const noDateTimeNow = 'no_date_time_now';
+  static const presentationModelStructure = 'presentation_model_structure';
 }

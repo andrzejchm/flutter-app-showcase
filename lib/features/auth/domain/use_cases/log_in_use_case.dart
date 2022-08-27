@@ -8,9 +8,9 @@ import 'package:flutter_demo/features/auth/domain/model/log_in_failure.dart';
 import 'package:flutter_demo/main.dart';
 
 class LogInUseCase {
-  const LogInUseCase(this.userStore);
+  const LogInUseCase(this._userStore);
 
-  final UserStore userStore;
+  final UserStore _userStore;
 
   Future<Either<LogInFailure, User>> execute({
     required String username,
@@ -31,7 +31,7 @@ class LogInUseCase {
         id: "id_$username",
         username: username,
       );
-      userStore.user = user;
+      _userStore.user = user;
       return success(
         user,
       );
