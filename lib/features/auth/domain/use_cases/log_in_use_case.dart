@@ -1,16 +1,17 @@
-import 'dart:math';
-
 import 'package:dartz/dartz.dart';
 import 'package:flutter_demo/core/domain/model/user.dart';
 import 'package:flutter_demo/core/domain/stores/user_store.dart';
 import 'package:flutter_demo/core/utils/either_extensions.dart';
 import 'package:flutter_demo/features/auth/domain/model/log_in_failure.dart';
-import 'package:flutter_demo/main.dart';
+import 'package:flutter_demo/features/auth/domain/repositories/user_repository.dart';
+
+typedef UserEither = Either<LogInFailure, User>;
 
 class LogInUseCase {
-  const LogInUseCase(this._userStore);
+  const LogInUseCase(this._userStore, this._userRepository);
 
   final UserStore _userStore;
+  final UserRepository _userRepository;
 
   Future<Either<LogInFailure, User>> execute({
     required String username,
@@ -20,22 +21,11 @@ class LogInUseCase {
       return failure(const LogInFailure.missingCredentials());
     }
 
-    if (!isUnitTests) {
-      //TODO simulation of network request
-      //ignore: no-magic-number
-      await Future.delayed(Duration(milliseconds: 500 + Random().nextInt(1000)));
+    final result = await _userRepository.getUser(username: username, password: password);
+    if (result.isSuccess) {
+      _userStore.user = result.getSuccess()!;
     }
 
-    if (username == 'test' && password == 'test123') {
-      final user = User(
-        id: "id_$username",
-        username: username,
-      );
-      _userStore.user = user;
-      return success(
-        user,
-      );
-    }
-    return failure(const LogInFailure.unknown());
+    return result;
   }
 }

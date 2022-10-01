@@ -1,10 +1,14 @@
+
 import 'package:flutter_demo/dependency_injection/app_component.dart';
+import 'package:flutter_demo/features/auth/data/rest/rest_api_user_repository.dart';
+import 'package:flutter_demo/features/auth/domain/repositories/user_repository.dart';
 import 'package:flutter_demo/features/auth/domain/use_cases/log_in_use_case.dart';
 import 'package:flutter_demo/features/auth/login/login_initial_params.dart';
 import 'package:flutter_demo/features/auth/login/login_navigator.dart';
 import 'package:flutter_demo/features/auth/login/login_page.dart';
 import 'package:flutter_demo/features/auth/login/login_presentation_model.dart';
 import 'package:flutter_demo/features/auth/login/login_presenter.dart';
+import 'package:http/http.dart';
 //DO-NOT-REMOVE APP_COMPONENT_IMPORTS
 
 /// registers all the dependencies in dependency graph in get_it package
@@ -19,7 +23,7 @@ void configureDependencies() {
 //ignore: long-method
 void _configureGeneralDependencies() {
   // ignore: unnecessary_statements
-  getIt
+  getIt..registerFactory<Client>(() => Client())
       //DO-NOT-REMOVE GENERAL_DEPS_GET_IT_CONFIG
       ;
 }
@@ -28,6 +32,9 @@ void _configureGeneralDependencies() {
 void _configureRepositories() {
   // ignore: unnecessary_statements
   getIt
+        ..registerFactory<UserRepository>(
+          () => RestApiUserRepository(getIt()),
+        )
       //DO-NOT-REMOVE REPOSITORIES_GET_IT_CONFIG
       ;
 }
@@ -46,6 +53,7 @@ void _configureUseCases() {
   getIt
         ..registerFactory<LogInUseCase>(
           () => LogInUseCase(
+            getIt(),
             getIt(),
           ),
         )
@@ -67,6 +75,7 @@ void _configureMvp() {
         ..registerFactoryParam<LoginPresenter, LoginInitialParams, dynamic>(
           (initialParams, _) => LoginPresenter(
             getIt(param1: initialParams),
+            getIt(),
             getIt(),
           ),
         )
