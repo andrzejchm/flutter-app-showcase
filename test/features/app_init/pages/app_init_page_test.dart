@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_demo/core/domain/stores/user_store.dart';
+import 'package:flutter_demo/core/domain/use_cases/app_init_use_case.dart';
 import 'package:flutter_demo/dependency_injection/app_component.dart';
 import 'package:flutter_demo/features/app_init/app_init_initial_params.dart';
 import 'package:flutter_demo/features/app_init/app_init_navigator.dart';
@@ -20,17 +21,19 @@ Future<void> main() async {
   late AppInitPresentationModel model;
   late AppInitPresenter presenter;
   late AppInitNavigator navigator;
+  late AppInitUseCase useCase;
 
   void _initMvp() {
     initParams = const AppInitInitialParams();
     model = AppInitPresentationModel.initial(
       initParams,
     );
+    useCase = AppInitMocks.appInitUseCase;
     navigator = MockAppInitNavigator();
     presenter = AppInitPresenter(
       model,
       navigator,
-      AppInitMocks.appInitUseCase,
+      useCase,
       UserStore(),
     );
     page = AppInitPage(presenter: presenter);
@@ -40,7 +43,10 @@ Future<void> main() async {
     "app_init_page",
     setUp: () async {
       _initMvp();
-      when(() => AppInitMocks.appInitUseCase.execute()).thenAnswer((_) => successFuture(unit));
+      when(() => navigator.openLogin(any())).thenAnswer((_) => Future.value());
+      when(() => useCase.execute()).thenAnswer((_) => successFuture(unit));
+
+      await presenter.onInit();
     },
     pageBuilder: () => page,
   );

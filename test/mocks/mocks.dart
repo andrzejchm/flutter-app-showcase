@@ -12,6 +12,7 @@ import 'mock_definitions.dart';
 
 class Mocks {
   static late MockAppNavigator appNavigator;
+  static late MockClient client;
 
   // MVP
 
@@ -22,6 +23,8 @@ class Mocks {
   //DO-NOT-REMOVE USE_CASE_MOCKS_STATIC_FIELD
 
   // REPOSITORIES
+  static late MockUserRepository userRepository;
+
   //DO-NOT-REMOVE REPOSITORIES_MOCKS_STATIC_FIELD
 
   // STORES
@@ -45,15 +48,15 @@ class Mocks {
   static void _initMocks() {
     //DO-NOT-REMOVE FEATURES_MOCKS
     appNavigator = MockAppNavigator();
+    client = MockClient();
     // MVP
     //DO-NOT-REMOVE MVP_INIT_MOCKS
-
     // USE CASES
     //DO-NOT-REMOVE USE_CASE_INIT_MOCKS
 
     // REPOSITORIES
     //DO-NOT-REMOVE REPOSITORIES_INIT_MOCKS
-
+    userRepository = MockUserRepository();
     // STORES
     userStore = MockUserStore();
     //DO-NOT-REMOVE REPOSITORIES_INIT_MOCKS

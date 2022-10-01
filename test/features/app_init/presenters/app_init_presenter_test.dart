@@ -19,7 +19,7 @@ void main() {
   late MockAppInitNavigator navigator;
 
   test(
-    'should call appInitUseCase on start',
+    'when presenter calls init with success then login page is opening',
     () async {
       // GIVEN
       whenListen(
@@ -27,17 +27,18 @@ void main() {
         Stream.fromIterable([const User.anonymous()]),
       );
       when(() => AppInitMocks.appInitUseCase.execute()).thenAnswer((_) => successFuture(unit));
-
+      when(() => navigator.openLogin(any())).thenAnswer((_) => Future.value());
       // WHEN
       await presenter.onInit();
 
       // THEN
       verify(() => AppInitMocks.appInitUseCase.execute());
       verify(() => Mocks.userStore.stream);
+      verify(() => navigator.openLogin(any()));
     },
   );
   test(
-    'should show error when appInitUseCase fails',
+    'when presenter calls init with failure then error dialog is showing',
     () async {
       // GIVEN
       whenListen(
