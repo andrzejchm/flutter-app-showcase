@@ -5,8 +5,6 @@ import 'package:flutter_demo/core/utils/either_extensions.dart';
 import 'package:flutter_demo/features/auth/domain/model/log_in_failure.dart';
 import 'package:flutter_demo/features/auth/domain/repositories/user_repository.dart';
 
-typedef UserEither = Either<LogInFailure, User>;
-
 class LogInUseCase {
   const LogInUseCase(this._userStore, this._userRepository);
 

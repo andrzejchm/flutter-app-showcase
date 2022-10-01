@@ -7,7 +7,7 @@ import 'package:flutter_demo/features/auth/login/login_navigator.dart';
 import 'package:flutter_demo/features/auth/login/login_presentation_model.dart';
 import 'package:flutter_demo/localization/app_localizations_utils.dart';
 
-class LoginPresenter extends Cubit<LoginViewModel>  with CubitToCubitCommunicationMixin<LoginViewModel>{
+class LoginPresenter extends Cubit<LoginViewModel> with CubitToCubitCommunicationMixin<LoginViewModel> {
   LoginPresenter(
     LoginPresentationModel super.model,
     this.navigator,
