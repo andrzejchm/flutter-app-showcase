@@ -1,6 +1,7 @@
 // ignore: unused_import
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/core/dimens.dart';
 import 'package:flutter_demo/core/utils/mvp_extensions.dart';
 import 'package:flutter_demo/features/app_init/app_init_presentation_model.dart';
 import 'package:flutter_demo/features/app_init/app_init_presenter.dart';
@@ -31,12 +32,12 @@ class _AppInitPageState extends State<AppInitPage>
   Widget build(BuildContext context) => Scaffold(
         body: stateObserver(
           builder: (context, state) => Padding(
-            padding: const EdgeInsets.all(32.0),
+            padding: const EdgeInsets.all(Dimens.VALUE_32),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Assets.images.logo.image(),
-                const SizedBox(height: 16),
+                const SizedBox(height: Dimens.VALUE_16),
                 if (state.isLoading) const CircularProgressIndicator(),
               ],
             ),
