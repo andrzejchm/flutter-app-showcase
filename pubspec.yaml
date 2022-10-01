@@ -31,6 +31,8 @@ dependencies:
 
   # widgets
   gap: 2.0.0
+  # http
+  http: ^0.13.5
 
 
 dev_dependencies:

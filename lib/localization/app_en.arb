@@ -8,5 +8,14 @@
   "missingCredsMessage": "Please provide both username and password!",
   "usernameHint": "username",
   "passwordHint": "password",
-  "logInAction": "Log in"
+  "logInAction": "Log in",
+  "loginSuccessTitle": "Login with success",
+  "loginSuccessMessage": "Hello {user}, welcome in the application!",
+  "@loginSuccessMessage" :{
+    "placeholders" : {
+        "user" : {
+            "type": "String"
+        }
+    }
+  }
 }
