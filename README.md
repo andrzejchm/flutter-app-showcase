@@ -61,7 +61,7 @@ Flutter project for the Demo architecture
 1. Install [flutter_gen](https://pub.dev/packages/flutter_gen) in your system and run:
 
    ```bash  
-   flutter_gen -c pubspec.yaml
+   fluttergen -c pubspec.yaml
    ```  
 
 2. Install git hooks (optional)
