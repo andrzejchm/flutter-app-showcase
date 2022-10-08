@@ -19,7 +19,7 @@ Future<void> main() async {
 
   void _initMvp() {
     initParams = const LoginInitialParams();
-    model = LoginPresentationModel.initial();
+    model = LoginPresentationModel.initial(initParams);
     navigator = LoginNavigator(Mocks.appNavigator);
     presenter = LoginPresenter(
       model,
