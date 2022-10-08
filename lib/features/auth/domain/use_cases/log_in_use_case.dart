@@ -7,17 +7,17 @@ import 'package:flutter_demo/core/utils/either_extensions.dart';
 import 'package:flutter_demo/features/auth/domain/model/log_in_failure.dart';
 import 'package:flutter_demo/main.dart';
 
-class LogInUseCase {
-  const LogInUseCase(this._userStore);
+class LoginUseCase {
+  const LoginUseCase(this._userStore);
 
   final UserStore _userStore;
 
-  Future<Either<LogInFailure, User>> execute({
+  Future<Either<LoginFailure, User>> execute({
     required String username,
     required String password,
   }) async {
     if (username.isEmpty || password.isEmpty) {
-      return failure(const LogInFailure.missingCredentials());
+      return failure(const LoginFailure.missingCredentials());
     }
 
     if (!isUnitTests) {
@@ -36,6 +36,6 @@ class LogInUseCase {
         user,
       );
     }
-    return failure(const LogInFailure.unknown());
+    return failure(const LoginFailure.unknown());
   }
 }
