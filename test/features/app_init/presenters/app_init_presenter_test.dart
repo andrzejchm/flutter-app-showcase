@@ -27,6 +27,7 @@ void main() {
         Stream.fromIterable([const User.anonymous()]),
       );
       when(() => AppInitMocks.appInitUseCase.execute()).thenAnswer((_) => successFuture(unit));
+      when(() => navigator.openLogin(any())).thenAnswer((_) => successFuture(unit));
 
       // WHEN
       await presenter.onInit();
