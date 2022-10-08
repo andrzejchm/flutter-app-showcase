@@ -20,9 +20,9 @@ class MockLoginNavigator extends Mock implements LoginNavigator {}
 //DO-NOT-REMOVE MVP_MOCK_DEFINITION
 
 // USE CASES
-class MockLogInFailure extends Mock implements LogInFailure {}
+class MockLogInFailure extends Mock implements LoginFailure {}
 
-class MockLogInUseCase extends Mock implements LogInUseCase {}
+class MockLogInUseCase extends Mock implements LoginUseCase {}
 //DO-NOT-REMOVE USE_CASE_MOCK_DEFINITION
 
 // REPOSITORIES

@@ -6,10 +6,10 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../../mocks/mocks.dart';
 
 void main() {
-  late LogInUseCase useCase;
+  late LoginUseCase useCase;
 
   setUp(() {
-    useCase = LogInUseCase(Mocks.userStore);
+    useCase = LoginUseCase(Mocks.userStore);
   });
 
   test(
@@ -26,7 +26,7 @@ void main() {
   );
 
   test("getIt resolves successfully", () async {
-    final useCase = getIt<LogInUseCase>();
+    final useCase = getIt<LoginUseCase>();
     expect(useCase, isNotNull);
   });
 }

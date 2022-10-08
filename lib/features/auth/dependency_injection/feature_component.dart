@@ -44,8 +44,8 @@ void _configureStores() {
 void _configureUseCases() {
   // ignore: unnecessary_statements
   getIt
-        ..registerFactory<LogInUseCase>(
-          () => LogInUseCase(
+        ..registerFactory<LoginUseCase>(
+          () => LoginUseCase(
             getIt(),
           ),
         )

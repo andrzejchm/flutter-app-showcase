@@ -1,11 +1,11 @@
 import 'package:flutter_demo/core/domain/model/displayable_failure.dart';
 import 'package:flutter_demo/localization/app_localizations_utils.dart';
 
-class LogInFailure implements HasDisplayableFailure {
+class LoginFailure implements HasDisplayableFailure {
   // ignore: avoid_field_initializers_in_const_classes
-  const LogInFailure.unknown([this.cause]) : type = LogInFailureType.unknown;
+  const LoginFailure.unknown([this.cause]) : type = LogInFailureType.unknown;
 
-  const LogInFailure.missingCredentials([this.cause]) : type = LogInFailureType.missingCredentials;
+  const LoginFailure.missingCredentials([this.cause]) : type = LogInFailureType.missingCredentials;
 
   final LogInFailureType type;
   final Object? cause;
