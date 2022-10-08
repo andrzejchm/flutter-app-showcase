@@ -9,5 +9,6 @@
   "usernameHint": "username",
   "passwordHint": "password",
   "logInAction": "Log in",
-  "logInSuccess": "Login successful!"
+  "logInSuccess": "Login successful!",
+  "logInSuccessDescription": "You are now logged in!"
 }
