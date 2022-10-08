@@ -17,8 +17,7 @@ class LoginPage extends StatefulWidget with HasPresenter<LoginPresenter> {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage>
-    with PresenterStateMixin<LoginViewModel, LoginPresenter, LoginPage> {
+class _LoginPageState extends State<LoginPage> with PresenterStateMixin<LoginViewModel, LoginPresenter, LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,9 +45,7 @@ class _LoginPageState extends State<LoginPage>
               builder: (context, state) => state.isLoading
                   ? const CircularProgressIndicator()
                   : ElevatedButton(
-                      onPressed: state.isLoginButtonEnabled
-                          ? () => presenter.login()
-                          : null,
+                      onPressed: state.isLoginButtonEnabled ? () => presenter.login() : null,
                       child: Text(appLocalizations.logInAction),
                     ),
             ),
