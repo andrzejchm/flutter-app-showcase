@@ -8,6 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../../../mocks/mocks.dart';
 import '../../../test_utils/golden_tests_utils.dart';
+import '../mocks/auth_mocks.dart';
 
 Future<void> main() async {
   late LoginPage page;
@@ -16,6 +17,7 @@ Future<void> main() async {
   late LoginPresenter presenter;
   late LoginNavigator navigator;
 
+  // ignore: no_leading_underscores_for_local_identifiers
   void _initMvp() {
     initParams = const LoginInitialParams();
     model = LoginPresentationModel.initial(
@@ -25,14 +27,31 @@ Future<void> main() async {
     presenter = LoginPresenter(
       model,
       navigator,
+      AuthMocks.logInUseCase,
     );
     page = LoginPage(presenter: presenter);
   }
 
   await screenshotTest(
     "login_page",
+    variantName: "initial_state_then_login_button_is_disabled",
     setUp: () async {
       _initMvp();
+    },
+    pageBuilder: () => page,
+  );
+
+  await screenshotTest(
+    "login_page",
+    variantName: "username_and_password_are_provided_then_login_button_is_enabled",
+    setUp: () async {
+      _initMvp();
+      presenter.emit(
+        model.copyWith(
+          username: "username",
+          password: "password",
+        ),
+      );
     },
     pageBuilder: () => page,
   );
