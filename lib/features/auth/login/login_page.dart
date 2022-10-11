@@ -44,10 +44,12 @@ class _LoginPageState extends State<LoginPage> with PresenterStateMixin<LoginVie
               ),
               const SizedBox(height: 16),
               stateObserver(
-                builder: (context, state) => ElevatedButton(
-                  onPressed: state.isLoginButtonEnabled ? () => doNothing() : null,
-                  child: Text(appLocalizations.logInAction),
-                ),
+                builder: (context, state) => state.isLoading
+                    ? const CircularProgressIndicator()
+                    : ElevatedButton(
+                        onPressed: state.isLoginButtonEnabled ? presenter.onLogin : null,
+                        child: Text(appLocalizations.logInAction),
+                      ),
               ),
             ],
           ),
