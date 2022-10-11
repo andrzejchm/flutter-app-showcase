@@ -6,15 +6,38 @@ class LoginPresentationModel implements LoginViewModel {
   LoginPresentationModel.initial(
     // ignore: avoid_unused_constructor_parameters
     LoginInitialParams initialParams,
-  );
+  )   : username = '',
+        password = '';
 
   /// Used for the copyWith method
-  LoginPresentationModel._();
+  LoginPresentationModel._({
+    required this.username,
+    required this.password,
+  });
 
-  LoginPresentationModel copyWith() {
-    return LoginPresentationModel._();
+  @override
+  final String username;
+
+  @override
+  final String password;
+
+  @override
+  bool get isLoginButtonEnabled => username.isNotEmpty && password.isNotEmpty;
+
+  LoginPresentationModel copyWith({
+    String? username,
+    String? password,
+  }) {
+    return LoginPresentationModel._(
+      username: username ?? this.username,
+      password: password ?? this.password,
+    );
   }
 }
 
 /// Interface to expose fields used by the view (page).
-abstract class LoginViewModel {}
+abstract class LoginViewModel {
+  String get username;
+  String get password;
+  bool get isLoginButtonEnabled;
+}
