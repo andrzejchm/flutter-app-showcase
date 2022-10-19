@@ -5,15 +5,16 @@ import 'package:flutter_demo/features/app_init/app_init_navigator.dart';
 import 'package:flutter_demo/features/app_init/app_init_page.dart';
 import 'package:flutter_demo/features/app_init/app_init_presentation_model.dart';
 import 'package:flutter_demo/features/app_init/app_init_presenter.dart';
+import 'package:flutter_demo/navigation/app_navigator.dart';
 //DO-NOT-REMOVE APP_COMPONENT_IMPORTS
 
 /// registers all the dependencies in dependency graph in get_it package
-void configureDependencies() {
+void configureDependencies(AppInitSuccess onSuccess) {
   _configureGeneralDependencies();
   _configureRepositories();
   _configureStores();
   _configureUseCases();
-  _configureMvp();
+  _configureMvp(onSuccess);
 }
 
 //ignore: long-method
@@ -52,11 +53,17 @@ void _configureUseCases() {
 }
 
 //ignore: long-method
-void _configureMvp() {
+void _configureMvp(AppInitSuccess onSuccess) {
   // ignore: unnecessary_statements
   getIt
         ..registerFactory<AppInitNavigator>(
-          () => AppInitNavigator(getIt()),
+          () {
+            final appNavigator = getIt<AppNavigator>();
+            return AppInitNavigator(
+              appNavigator,
+              onSuccess,
+            );
+          },
         )
         ..registerFactoryParam<AppInitPresentationModel, AppInitInitialParams, dynamic>(
           (params, _) => AppInitPresentationModel.initial(params),

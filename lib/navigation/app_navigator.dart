@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/core/helpers.dart';
 import 'package:flutter_demo/core/utils/durations.dart';
+import 'package:flutter_demo/features/auth/login/login_navigator.dart';
 import 'package:flutter_demo/navigation/transitions/fade_in_page_transition.dart';
 import 'package:flutter_demo/navigation/transitions/slide_bottom_page_transition.dart';
 
-class AppNavigator {
+class AppNavigator with LoginRoute {
   AppNavigator() {
     suppressUnusedCodeWarning([fadeInRoute, slideBottomRoute]);
   }
 
   static final navigatorKey = GlobalKey<NavigatorState>();
+
+  @override
+  AppNavigator get appNavigator => this;
 
   Future<R?> push<R>(
     Route<R> route, {
