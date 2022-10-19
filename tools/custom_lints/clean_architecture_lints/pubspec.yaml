@@ -3,7 +3,7 @@ environment:
   sdk: '>=2.16.0 <3.0.0'
 
 dependency_overrides:
-  recase: 4.0.0
+  recase: 4.1.0
 
 dependencies:
   collection:

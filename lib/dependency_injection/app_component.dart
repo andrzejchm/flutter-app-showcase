@@ -11,7 +11,7 @@ final getIt = GetIt.instance;
 /// registers all the dependencies in dependency graph in get_it package
 void configureDependencies() {
   _configureGeneralDependencies();
-  app_init.configureDependencies((navigator) => navigator.openLogin(const LoginInitialParams()));
+  app_init.configureDependencies();
   auth.configureDependencies();
 //DO-NOT-REMOVE FEATURE_COMPONENT_INIT
 

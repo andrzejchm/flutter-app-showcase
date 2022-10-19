@@ -9,12 +9,12 @@ import 'package:flutter_demo/navigation/app_navigator.dart';
 //DO-NOT-REMOVE APP_COMPONENT_IMPORTS
 
 /// registers all the dependencies in dependency graph in get_it package
-void configureDependencies(AppInitSuccess onSuccess) {
+void configureDependencies() {
   _configureGeneralDependencies();
   _configureRepositories();
   _configureStores();
   _configureUseCases();
-  _configureMvp(onSuccess);
+  _configureMvp();
 }
 
 //ignore: long-method
@@ -53,7 +53,7 @@ void _configureUseCases() {
 }
 
 //ignore: long-method
-void _configureMvp(AppInitSuccess onSuccess) {
+void _configureMvp() {
   // ignore: unnecessary_statements
   getIt
         ..registerFactory<AppInitNavigator>(
@@ -61,7 +61,6 @@ void _configureMvp(AppInitSuccess onSuccess) {
             final appNavigator = getIt<AppNavigator>();
             return AppInitNavigator(
               appNavigator,
-              onSuccess,
             );
           },
         )

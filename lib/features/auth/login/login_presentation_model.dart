@@ -7,11 +7,11 @@ import 'package:flutter_demo/features/auth/login/login_initial_params.dart';
 /// Model used by presenter, contains fields that are relevant to presenters and implements ViewModel to expose data to view (page)
 class LoginPresentationModel implements LoginViewModel {
   /// Used for the copyWith method
-  LoginPresentationModel._(
-    this.username,
-    this.password,
-    this.logInResult,
-  );
+  LoginPresentationModel._({
+    required this.username,
+    required this.password,
+    required this.logInResult,
+  });
 
   /// Creates the initial state
   LoginPresentationModel.initial(
@@ -39,9 +39,9 @@ class LoginPresentationModel implements LoginViewModel {
     FutureResult<Either<LogInFailure, User>>? logInResult,
   }) {
     return LoginPresentationModel._(
-      username ?? this.username,
-      password ?? this.password,
-      logInResult ?? this.logInResult,
+      username: username ?? this.username,
+      password: password ?? this.password,
+      logInResult: logInResult ?? this.logInResult,
     );
   }
 }
