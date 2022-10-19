@@ -20,8 +20,7 @@ class LoginPage extends StatefulWidget with HasPresenter<LoginPresenter> {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage>
-    with PresenterStateMixin<LoginViewModel, LoginPresenter, LoginPage> {
+class _LoginPageState extends State<LoginPage> with PresenterStateMixin<LoginViewModel, LoginPresenter, LoginPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: Padding(
@@ -55,8 +54,7 @@ class _LoginPageState extends State<LoginPage>
               stateObserver(
                 builder: (context, state) {
                   return ElevatedButton(
-                    onPressed:
-                        state.isLoginEnabled && !state.isLoading ? presenter.performLogin : null,
+                    onPressed: state.isLoginEnabled && !state.isLoading ? presenter.performLogin : null,
                     child: state.isLoading
                         ? const SizedBox(
                             height: 25,

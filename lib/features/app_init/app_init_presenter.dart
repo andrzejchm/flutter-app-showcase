@@ -10,8 +10,7 @@ import 'package:flutter_demo/core/utils/mvp_extensions.dart';
 import 'package:flutter_demo/features/app_init/app_init_navigator.dart';
 import 'package:flutter_demo/features/app_init/app_init_presentation_model.dart';
 
-class AppInitPresenter extends Cubit<AppInitViewModel>
-    with CubitToCubitCommunicationMixin<AppInitViewModel> {
+class AppInitPresenter extends Cubit<AppInitViewModel> with CubitToCubitCommunicationMixin<AppInitViewModel> {
   AppInitPresenter(
     AppInitPresentationModel super.model,
     this.navigator,

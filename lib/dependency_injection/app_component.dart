@@ -1,6 +1,5 @@
 import 'package:flutter_demo/core/domain/stores/user_store.dart';
-import 'package:flutter_demo/features/app_init/dependency_injection/feature_component.dart'
-    as app_init;
+import 'package:flutter_demo/features/app_init/dependency_injection/feature_component.dart' as app_init;
 import 'package:flutter_demo/features/auth/dependency_injection/feature_component.dart' as auth;
 import 'package:flutter_demo/features/auth/login/login_initial_params.dart';
 import 'package:flutter_demo/navigation/app_navigator.dart';
