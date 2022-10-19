@@ -20,7 +20,8 @@ class LoginPage extends StatefulWidget with HasPresenter<LoginPresenter> {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> with PresenterStateMixin<LoginViewModel, LoginPresenter, LoginPage> {
+class _LoginPageState extends State<LoginPage>
+    with PresenterStateMixin<LoginViewModel, LoginPresenter, LoginPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: Padding(
@@ -28,26 +29,43 @@ class _LoginPageState extends State<LoginPage> with PresenterStateMixin<LoginVie
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextField(
-                decoration: InputDecoration(
-                  hintText: appLocalizations.usernameHint,
-                ),
-                onChanged: (text) => doNothing(), //TODO
+              stateObserver(
+                builder: (context, state) {
+                  return TextField(
+                    enabled: !state.isLoading,
+                    decoration: InputDecoration(
+                      hintText: appLocalizations.usernameHint,
+                    ),
+                    onChanged: presenter.changeUsername,
+                  );
+                },
               ),
               const SizedBox(height: 8),
-              TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  hintText: appLocalizations.passwordHint,
+              stateObserver(
+                builder: (context, state) => TextField(
+                  enabled: !state.isLoading,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    hintText: appLocalizations.passwordHint,
+                  ),
+                  onChanged: presenter.changePassword,
                 ),
-                onChanged: (text) => doNothing(), //TODO
               ),
               const SizedBox(height: 16),
               stateObserver(
-                builder: (context, state) => ElevatedButton(
-                  onPressed: () => doNothing(), //TODO
-                  child: Text(appLocalizations.logInAction),
-                ),
+                builder: (context, state) {
+                  return ElevatedButton(
+                    onPressed:
+                        state.isLoginEnabled && !state.isLoading ? presenter.performLogin : null,
+                    child: state.isLoading
+                        ? const SizedBox(
+                            height: 25,
+                            width: 25,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                        : Text(appLocalizations.logInAction),
+                  );
+                },
               ),
             ],
           ),

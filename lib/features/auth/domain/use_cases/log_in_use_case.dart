@@ -12,6 +12,7 @@ class LogInUseCase {
 
   final UserStore _userStore;
 
+  //TODO: should we return user if it's in userStore anyway?
   Future<Either<LogInFailure, User>> execute({
     required String username,
     required String password,
