@@ -1,7 +1,6 @@
 // ignore: unused_import
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/core/helpers.dart';
 import 'package:flutter_demo/core/utils/mvp_extensions.dart';
 import 'package:flutter_demo/features/auth/login/login_presentation_model.dart';
 import 'package:flutter_demo/features/auth/login/login_presenter.dart';
@@ -32,7 +31,7 @@ class _LoginPageState extends State<LoginPage> with PresenterStateMixin<LoginVie
                 decoration: InputDecoration(
                   hintText: appLocalizations.usernameHint,
                 ),
-                onChanged: (text) => doNothing(), //TODO
+                onChanged: (username) => presenter.usernameChanged(username: username),
               ),
               const SizedBox(height: 8),
               TextField(
@@ -40,13 +39,22 @@ class _LoginPageState extends State<LoginPage> with PresenterStateMixin<LoginVie
                 decoration: InputDecoration(
                   hintText: appLocalizations.passwordHint,
                 ),
-                onChanged: (text) => doNothing(), //TODO
+                onChanged: (password) => presenter.passwordChanged(password: password),
               ),
               const SizedBox(height: 16),
               stateObserver(
                 builder: (context, state) => ElevatedButton(
-                  onPressed: () => doNothing(), //TODO
-                  child: Text(appLocalizations.logInAction),
+                  onPressed: state.isLoginEnabled ? () => presenter.login() : null,
+                  child: state.isLoading
+                      ? const SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                            strokeWidth: 1,
+                          ),
+                        )
+                      : Text(appLocalizations.logInAction),
                 ),
               ),
             ],

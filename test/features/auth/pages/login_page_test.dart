@@ -8,6 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../../../mocks/mocks.dart';
 import '../../../test_utils/golden_tests_utils.dart';
+import '../mocks/auth_mocks.dart';
 
 Future<void> main() async {
   late LoginPage page;
@@ -25,6 +26,7 @@ Future<void> main() async {
     presenter = LoginPresenter(
       model,
       navigator,
+      AuthMocks.logInUseCase,
     );
     page = LoginPage(presenter: presenter);
   }
