@@ -1,8 +1,12 @@
+import 'package:flutter_demo/core/domain/model/user.dart';
+import 'package:flutter_demo/features/auth/domain/model/log_in_failure.dart';
 import 'package:flutter_demo/features/auth/login/login_initial_params.dart';
 import 'package:flutter_demo/features/auth/login/login_presentation_model.dart';
 import 'package:flutter_demo/features/auth/login/login_presenter.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 
+import '../../../test_utils/test_utils.dart';
 import '../mocks/auth_mock_definitions.dart';
 import '../mocks/auth_mocks.dart';
 
@@ -12,9 +16,37 @@ void main() {
   late MockLoginNavigator navigator;
 
   test(
-    'sample test',
-    () {
-      expect(presenter, isNotNull); // TODO implement this
+    'should show error when logIn fails',
+    () async {
+      // GIVEN
+      when(
+        () => AuthMocks.logInUseCase.execute(username: any(named: 'username'), password: any(named: "password")),
+      ).thenAnswer((_) => failFuture(const LogInFailure.unknown()));
+      when(() => navigator.showError(any())).thenAnswer((_) => Future.value());
+
+      // WHEN
+      await presenter.login();
+
+      // THEN
+      verify(() => navigator.showError(any()));
+    },
+  );
+
+  test(
+    'should show success alert when logIn succeeds',
+    () async {
+      // GIVEN
+      when(() => AuthMocks.logInUseCase.execute(username: any(named: 'username'), password: any(named: "password")))
+          .thenAnswer((_) => successFuture(const User.anonymous()));
+      when(
+        () => navigator.showAlert(title: any(named: 'title'), message: any(named: 'message')),
+      ).thenAnswer((_) => Future.value());
+
+      // WHEN
+      await presenter.login();
+
+      // THEN
+      verify(() => navigator.showAlert(title: any(named: 'title'), message: any(named: 'message')));
     },
   );
 
