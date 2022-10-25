@@ -54,7 +54,8 @@ dev_dependencies:
   mocktail_image_network: 0.3.1
   mocktail: 0.3.0
   bloc_test: 9.0.3
-
+  build_runner:
+  flutter_gen_runner:
 
 
 

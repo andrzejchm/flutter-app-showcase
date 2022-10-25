@@ -23,7 +23,9 @@ class LogInUseCase {
     if (!isUnitTests) {
       //TODO simulation of network request
       //ignore: no-magic-number
-      await Future.delayed(Duration(milliseconds: 500 + Random().nextInt(1000)));
+      await Future.delayed(
+        Duration(milliseconds: 500 + Random().nextInt(1000)),
+      );
     }
 
     if (username == 'test' && password == 'test123') {
