@@ -5,6 +5,8 @@ import 'package:flutter_demo/features/auth/login/login_initial_params.dart';
 import 'package:flutter_demo/features/auth/login/login_navigator.dart';
 import 'package:flutter_demo/features/auth/login/login_presentation_model.dart';
 import 'package:flutter_demo/features/auth/login/login_presenter.dart';
+import 'package:flutter_demo/navigation/alert_dialog_route.dart';
+import 'package:flutter_demo/navigation/error_dialog_route.dart';
 import 'package:mocktail/mocktail.dart';
 //DO-NOT-REMOVE IMPORTS_MOCK_DEFINITIONS
 
@@ -17,6 +19,10 @@ class MockLoginPresentationModel extends Mock implements LoginPresentationModel 
 class MockLoginInitialParams extends Mock implements LoginInitialParams {}
 
 class MockLoginNavigator extends Mock implements LoginNavigator {}
+
+class MockAlertDialogRoute extends Mock implements AlertDialogRoute {}
+
+class MockErrorDialogRoute extends Mock implements ErrorDialogRoute {}
 //DO-NOT-REMOVE MVP_MOCK_DEFINITION
 
 // USE CASES
