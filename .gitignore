@@ -63,3 +63,4 @@ app.*.map.json
 /test/**/goldens/windows
 /test/**/goldens/linux
 /test/**/failures/*.png
+pubspec.lock
