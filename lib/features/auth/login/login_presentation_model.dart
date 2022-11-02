@@ -28,8 +28,7 @@ class LoginPresentationModel implements LoginViewModel {
   String get password => _password;
 
   @override
-  bool get signInButtonEnabled =>
-      _username.trim().isNotEmpty && _password.trim().isNotEmpty;
+  bool get signInButtonEnabled => _username.trim().isNotEmpty && _password.trim().isNotEmpty;
 
   @override
   bool get isLoading => loginUseCase.isPending();
