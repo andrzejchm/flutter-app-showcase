@@ -48,14 +48,16 @@ class _LoginPageState extends State<LoginPage>
               ),
               const SizedBox(height: 16),
               stateObserver(
-                builder: (context, state) => ElevatedButton(
-                  onPressed: state.signInButtonEnabled
-                      ? () {
-                          print('its working');
-                        }
-                      : null,
-                  child: Text(appLocalizations.logInAction),
-                ),
+                builder: (context, state) => state.isLoading
+                    ? const CircularProgressIndicator()
+                    : ElevatedButton(
+                        onPressed: state.signInButtonEnabled
+                            ? () async {
+                                await widget.presenter.login();
+                              }
+                            : null,
+                        child: Text(appLocalizations.logInAction),
+                      ),
               ),
             ],
           ),

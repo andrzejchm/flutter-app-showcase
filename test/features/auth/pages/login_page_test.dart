@@ -25,6 +25,8 @@ Future<void> main() async {
     presenter = LoginPresenter(
       model,
       navigator,
+            getIt(),
+
     );
     page = LoginPage(presenter: presenter);
   }
