@@ -6,7 +6,6 @@ import 'package:flutter_demo/features/app_init/app_init_navigator.dart';
 import 'package:flutter_demo/features/app_init/app_init_page.dart';
 import 'package:flutter_demo/features/app_init/app_init_presentation_model.dart';
 import 'package:flutter_demo/features/app_init/app_init_presenter.dart';
-import 'package:flutter_demo/features/auth/login/login_initial_params.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -27,14 +26,12 @@ Future<void> main() async {
     model = AppInitPresentationModel.initial(
       initParams,
     );
-   const  loginInitialParams = LoginInitialParams();
     navigator = MockAppInitNavigator();
     presenter = AppInitPresenter(
       model,
       navigator,
       AppInitMocks.appInitUseCase,
       UserStore(),
-      loginInitialParams,
     );
     page = AppInitPage(presenter: presenter);
   }

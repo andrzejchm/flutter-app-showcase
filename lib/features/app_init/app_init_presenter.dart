@@ -18,7 +18,6 @@ class AppInitPresenter extends Cubit<AppInitViewModel>
     this.navigator,
     this.appInitUseCase,
     this.userStore,
-    this.loginInitialParams,
   ) {
     listenTo<User>(
       userStore,
@@ -29,7 +28,7 @@ class AppInitPresenter extends Cubit<AppInitViewModel>
   final AppInitNavigator navigator;
   final AppInitUseCase appInitUseCase;
   final UserStore userStore;
-  final LoginInitialParams loginInitialParams;
+  static const LoginInitialParams loginInitialParams = LoginInitialParams();
 
   AppInitPresentationModel get _model => state as AppInitPresentationModel;
 
