@@ -1,7 +1,6 @@
 // ignore: unused_import
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/core/helpers.dart';
 import 'package:flutter_demo/core/utils/mvp_extensions.dart';
 import 'package:flutter_demo/features/auth/login/login_presentation_model.dart';
 import 'package:flutter_demo/features/auth/login/login_presenter.dart';
@@ -20,7 +19,8 @@ class LoginPage extends StatefulWidget with HasPresenter<LoginPresenter> {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> with PresenterStateMixin<LoginViewModel, LoginPresenter, LoginPage> {
+class _LoginPageState extends State<LoginPage>
+    with PresenterStateMixin<LoginViewModel, LoginPresenter, LoginPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: Padding(
@@ -32,7 +32,9 @@ class _LoginPageState extends State<LoginPage> with PresenterStateMixin<LoginVie
                 decoration: InputDecoration(
                   hintText: appLocalizations.usernameHint,
                 ),
-                onChanged: (text) => doNothing(), //TODO
+                onChanged: (text) => setState(() {
+                  widget.presenter.usernameChanged(user: text);
+                }),
               ),
               const SizedBox(height: 8),
               TextField(
@@ -40,12 +42,18 @@ class _LoginPageState extends State<LoginPage> with PresenterStateMixin<LoginVie
                 decoration: InputDecoration(
                   hintText: appLocalizations.passwordHint,
                 ),
-                onChanged: (text) => doNothing(), //TODO
+                onChanged: (text) => setState(() {
+                  widget.presenter.passwordChanged(password: text);
+                }),
               ),
               const SizedBox(height: 16),
               stateObserver(
                 builder: (context, state) => ElevatedButton(
-                  onPressed: () => doNothing(), //TODO
+                  onPressed: state.signInButtonEnabled
+                      ? () {
+                          print('its working');
+                        }
+                      : null,
                   child: Text(appLocalizations.logInAction),
                 ),
               ),
