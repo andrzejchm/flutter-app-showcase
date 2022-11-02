@@ -12,4 +12,16 @@ class LoginPresenter extends Cubit<LoginViewModel> {
 
   // ignore: unused_element
   LoginPresentationModel get _model => state as LoginPresentationModel;
+
+  void usernameChanged({required String user}) {
+    _model.usernameChanged(user: user);
+  }
+
+  void passwordChanged({required String password}) {
+    _model.passwordChanged(password: password);
+  }
+
+  void signInClicked({required bool value}) {
+    _model.signInClicked(value: value);
+  }
 }
