@@ -10,8 +10,11 @@ import 'package:flutter_demo/core/utils/either_extensions.dart';
 import 'package:flutter_demo/core/utils/mvp_extensions.dart';
 import 'package:flutter_demo/features/app_init/app_init_navigator.dart';
 import 'package:flutter_demo/features/app_init/app_init_presentation_model.dart';
+import 'package:flutter_demo/features/auth/login/login_initial_params.dart';
+import 'package:flutter_demo/features/auth/login/login_navigator.dart';
 
-class AppInitPresenter extends Cubit<AppInitViewModel> with CubitToCubitCommunicationMixin<AppInitViewModel> {
+class AppInitPresenter extends Cubit<AppInitViewModel>
+    with CubitToCubitCommunicationMixin<AppInitViewModel> {
   AppInitPresenter(
     AppInitPresentationModel super.model,
     this.navigator,
@@ -31,12 +34,15 @@ class AppInitPresenter extends Cubit<AppInitViewModel> with CubitToCubitCommunic
   AppInitPresentationModel get _model => state as AppInitPresentationModel;
 
   Future<void> onInit() async {
-    await appInitUseCase
+    await await appInitUseCase
         .execute() //
-        .observeStatusChanges((result) => emit(_model.copyWith(appInitResult: result)))
+        .observeStatusChanges(
+          (result) => emit(_model.copyWith(appInitResult: result)),
+        )
         .asyncFold(
           (fail) => navigator.showError(fail.displayableFailure()),
-          (success) => doNothing(), //todo!
+          (success) => LoginNavigator(navigator.appNavigator)
+              .openLogin(const LoginInitialParams()), //todo!
         );
   }
 }
