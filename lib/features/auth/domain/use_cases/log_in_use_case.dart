@@ -5,14 +5,17 @@ import 'package:flutter_demo/core/domain/model/user.dart';
 import 'package:flutter_demo/core/domain/stores/user_store.dart';
 import 'package:flutter_demo/core/utils/either_extensions.dart';
 import 'package:flutter_demo/features/auth/domain/model/log_in_failure.dart';
+import 'package:flutter_demo/features/auth/domain/model/log_in_success.dart';
 import 'package:flutter_demo/main.dart';
 
 class LogInUseCase {
-  const LogInUseCase(this._userStore);
+  const LogInUseCase(
+    this._userStore,
+  );
 
   final UserStore _userStore;
 
-  Future<Either<LogInFailure, User>> execute({
+  Future<Either<LogInFailure, LogInSuccess>> execute({
     required String username,
     required String password,
   }) async {
@@ -22,8 +25,10 @@ class LogInUseCase {
 
     if (!isUnitTests) {
       //TODO simulation of network request
-      //ignore: no-magic-number
-      await Future.delayed(Duration(milliseconds: 500 + Random().nextInt(1000)));
+      await Future.delayed(
+        //ignore: no-magic-number
+        Duration(milliseconds: 500 + Random().nextInt(1000)),
+      );
     }
 
     if (username == 'test' && password == 'test123') {
@@ -33,7 +38,7 @@ class LogInUseCase {
       );
       _userStore.user = user;
       return success(
-        user,
+        LogInSuccess(user: user),
       );
     }
     return failure(const LogInFailure.unknown());
