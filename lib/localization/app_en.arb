@@ -8,5 +8,8 @@
   "missingCredsMessage": "Please provide both username and password!",
   "usernameHint": "username",
   "passwordHint": "password",
-  "logInAction": "Log in"
+  "logInAction": "Log in",
+  "loginSuccessTitle": "Success",
+  "loginSuccessMessage": "You are successfully logged in"
+
 }

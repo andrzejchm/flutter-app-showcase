@@ -61,12 +61,14 @@ void _configureMvp() {
         ..registerFactory<LoginNavigator>(
           () => LoginNavigator(getIt()),
         )
-        ..registerFactoryParam<LoginPresentationModel, LoginInitialParams, dynamic>(
-          (params, _) => LoginPresentationModel.initial(params),
+        ..registerFactoryParam<LoginPresentationModel, LoginInitialParams,
+            dynamic>(
+          (params, _) => LoginPresentationModel.initial(),
         )
         ..registerFactoryParam<LoginPresenter, LoginInitialParams, dynamic>(
           (initialParams, _) => LoginPresenter(
             getIt(param1: initialParams),
+            getIt(),
             getIt(),
           ),
         )
