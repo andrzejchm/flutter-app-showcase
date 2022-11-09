@@ -1,5 +1,6 @@
 // ignore_for_file: unused-code
 class Durations {
+  static const extraLong = 1000;
   static const long = 500;
   static const medium = 300;
   static const short = 150;

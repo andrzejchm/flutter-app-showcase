@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_demo/core/domain/model/user.dart';
 import 'package:flutter_demo/core/domain/stores/user_store.dart';
+import 'package:flutter_demo/core/utils/durations.dart';
 import 'package:flutter_demo/core/utils/either_extensions.dart';
 import 'package:flutter_demo/features/auth/domain/model/log_in_failure.dart';
 import 'package:flutter_demo/main.dart';
@@ -22,8 +23,11 @@ class LogInUseCase {
 
     if (!isUnitTests) {
       //TODO simulation of network request
-      //ignore: no-magic-number
-      await Future.delayed(Duration(milliseconds: 500 + Random().nextInt(1000)));
+      await Future.delayed(
+        Duration(
+          milliseconds: Durations.long + Random().nextInt(Durations.extraLong),
+        ),
+      );
     }
 
     if (username == 'test' && password == 'test123') {
