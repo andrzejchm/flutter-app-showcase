@@ -36,7 +36,7 @@ class _AppInitPageState extends State<AppInitPage>
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Assets.images.logo.image(),
-                const SizedBox(height: 16),
+                const SizedBox(height: 16.0),
                 if (state.isLoading) const CircularProgressIndicator(),
               ],
             ),

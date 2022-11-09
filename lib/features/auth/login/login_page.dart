@@ -32,7 +32,7 @@ class _LoginPageState extends State<LoginPage>
                 ),
                 onChanged: (value) => presenter.onUsernameUpdate(value),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 8.0),
               TextField(
                 obscureText: true,
                 decoration: InputDecoration(
@@ -40,7 +40,7 @@ class _LoginPageState extends State<LoginPage>
                 ),
                 onChanged: (value) => presenter.onPasswordUpdate(value),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 16.0),
               stateObserver(
                 // avoid unnecessary builds while changing name or password
                 buildWhen: (previous, current) =>
