@@ -41,7 +41,6 @@ class _LoginPageState extends State<LoginPage> with PresenterStateMixin<LoginVie
               ),
               const SizedBox(height: 16.0),
               stateObserver(
-                // avoid unnecessary builds while changing name or password
                 buildWhen: (previous, current) =>
                     (previous.isLoginEnabled != current.isLoginEnabled) || (previous.isLoading != current.isLoading),
                 builder: (_, state) => SizedBox(
