@@ -44,29 +44,21 @@ class _LoginPageState extends State<LoginPage> with PresenterStateMixin<LoginVie
                 // avoid unnecessary builds while changing name or password
                 buildWhen: (previous, current) =>
                     (previous.isLoginEnabled != current.isLoginEnabled) || (previous.isLoading != current.isLoading),
-                builder: (_, state) => !state.isLoading ? _buildLoginButton() : _buildLoadingIndicator(),
+                builder: (_, state) => SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: state.isLoginEnabled && !state.isLoading ? () => presenter.onLogin() : null,
+                    child: !state.isLoading
+                        ? Text(appLocalizations.logInAction)
+                        : const SizedBox(
+                            height: 20.0,
+                            width: 20.0,
+                            child: CircularProgressIndicator(strokeWidth: 2.5),
+                          ),
+                  ),
+                ),
               ),
             ],
-          ),
-        ),
-      );
-
-  Widget _buildLoginButton() => SizedBox(
-        width: double.infinity,
-        child: ElevatedButton(
-          onPressed: state.isLoginEnabled ? () => presenter.onLogin() : null,
-          child: Text(appLocalizations.logInAction),
-        ),
-      );
-
-  Widget _buildLoadingIndicator() => const SizedBox(
-        width: double.infinity,
-        child: ElevatedButton(
-          onPressed: null,
-          child: SizedBox(
-            height: 20.0,
-            width: 20.0,
-            child: CircularProgressIndicator(),
           ),
         ),
       );
