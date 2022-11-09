@@ -17,8 +17,7 @@ class LoginPage extends StatefulWidget with HasPresenter<LoginPresenter> {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage>
-    with PresenterStateMixin<LoginViewModel, LoginPresenter, LoginPage> {
+class _LoginPageState extends State<LoginPage> with PresenterStateMixin<LoginViewModel, LoginPresenter, LoginPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: Padding(
@@ -44,11 +43,8 @@ class _LoginPageState extends State<LoginPage>
               stateObserver(
                 // avoid unnecessary builds while changing name or password
                 buildWhen: (previous, current) =>
-                    (previous.isLoginEnabled != current.isLoginEnabled) ||
-                    (previous.isLoading != current.isLoading),
-                builder: (_, state) => !state.isLoading
-                    ? _buildLoginButton()
-                    : _buildLoadingIndicator(),
+                    (previous.isLoginEnabled != current.isLoginEnabled) || (previous.isLoading != current.isLoading),
+                builder: (_, state) => !state.isLoading ? _buildLoginButton() : _buildLoadingIndicator(),
               ),
             ],
           ),
