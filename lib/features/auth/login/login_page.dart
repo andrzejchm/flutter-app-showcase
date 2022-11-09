@@ -1,7 +1,4 @@
-// ignore: unused_import
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/core/helpers.dart';
 import 'package:flutter_demo/core/utils/mvp_extensions.dart';
 import 'package:flutter_demo/features/auth/login/login_presentation_model.dart';
 import 'package:flutter_demo/features/auth/login/login_presenter.dart';
@@ -20,7 +17,8 @@ class LoginPage extends StatefulWidget with HasPresenter<LoginPresenter> {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> with PresenterStateMixin<LoginViewModel, LoginPresenter, LoginPage> {
+class _LoginPageState extends State<LoginPage>
+    with PresenterStateMixin<LoginViewModel, LoginPresenter, LoginPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: Padding(
@@ -32,7 +30,7 @@ class _LoginPageState extends State<LoginPage> with PresenterStateMixin<LoginVie
                 decoration: InputDecoration(
                   hintText: appLocalizations.usernameHint,
                 ),
-                onChanged: (text) => doNothing(), //TODO
+                onChanged: (value) => presenter.onUsernameUpdate(value),
               ),
               const SizedBox(height: 8),
               TextField(
@@ -40,16 +38,39 @@ class _LoginPageState extends State<LoginPage> with PresenterStateMixin<LoginVie
                 decoration: InputDecoration(
                   hintText: appLocalizations.passwordHint,
                 ),
-                onChanged: (text) => doNothing(), //TODO
+                onChanged: (value) => presenter.onPasswordUpdate(value),
               ),
               const SizedBox(height: 16),
               stateObserver(
-                builder: (context, state) => ElevatedButton(
-                  onPressed: () => doNothing(), //TODO
-                  child: Text(appLocalizations.logInAction),
-                ),
+                // avoid unnecessary builds while changing name or password
+                buildWhen: (previous, current) =>
+                    (previous.isLoginEnabled != current.isLoginEnabled) ||
+                    (previous.isLoading != current.isLoading),
+                builder: (_, state) => !state.isLoading
+                    ? _buildLoginButton()
+                    : _buildLoadingIndicator(),
               ),
             ],
+          ),
+        ),
+      );
+
+  Widget _buildLoginButton() => SizedBox(
+        width: double.infinity,
+        child: ElevatedButton(
+          onPressed: state.isLoginEnabled ? () => presenter.onLogin() : null,
+          child: Text(appLocalizations.logInAction),
+        ),
+      );
+
+  Widget _buildLoadingIndicator() => const SizedBox(
+        width: double.infinity,
+        child: ElevatedButton(
+          onPressed: null,
+          child: SizedBox(
+            height: 20.0,
+            width: 20.0,
+            child: CircularProgressIndicator(),
           ),
         ),
       );
