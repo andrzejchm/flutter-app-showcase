@@ -14,6 +14,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/logo.webp
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.webp');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [logo];
 }
 
 class Assets {
@@ -79,6 +82,8 @@ class AssetGenImage {
       cacheHeight: cacheHeight,
     );
   }
+
+  ImageProvider provider() => AssetImage(_assetName);
 
   String get path => _assetName;
 
