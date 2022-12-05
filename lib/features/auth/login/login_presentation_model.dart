@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter_demo/core/domain/model/user.dart';
 import 'package:flutter_demo/core/utils/bloc_extensions.dart';
 import 'package:flutter_demo/features/auth/domain/model/log_in_failure.dart';
 import 'package:flutter_demo/features/auth/login/login_initial_params.dart';
@@ -20,7 +21,7 @@ class LoginPresentationModel implements LoginViewModel {
     required this.password,
   });
 
-  final FutureResult<Either<LogInFailure, Unit>> loginResult;
+  final FutureResult<Either<LogInFailure, User>> loginResult;
   final String username;
   final String password;
 
@@ -31,7 +32,7 @@ class LoginPresentationModel implements LoginViewModel {
   bool get isLoginEnabled => username.isNotEmpty && password.isNotEmpty;
 
   LoginPresentationModel copyWith({
-    FutureResult<Either<LogInFailure, Unit>>? loginResult,
+    FutureResult<Either<LogInFailure, User>>? loginResult,
     String? username,
     String? password,
   }) {

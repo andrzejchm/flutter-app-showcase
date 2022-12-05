@@ -1,7 +1,6 @@
 // ignore: unused_import
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/core/helpers.dart';
 import 'package:flutter_demo/core/utils/mvp_extensions.dart';
 import 'package:flutter_demo/features/auth/login/login_presentation_model.dart';
 import 'package:flutter_demo/features/auth/login/login_presenter.dart';
@@ -44,10 +43,12 @@ class _LoginPageState extends State<LoginPage> with PresenterStateMixin<LoginVie
               ),
               const SizedBox(height: 16),
               stateObserver(
-                builder: (context, state) => ElevatedButton(
-                  onPressed: state.isLoginEnabled ? () => doNothing() : null,
-                  child: Text(appLocalizations.logInAction),
-                ),
+                builder: (context, state) => (state.isLoading)
+                    ? const CircularProgressIndicator()
+                    : ElevatedButton(
+                        onPressed: state.isLoginEnabled ? () => presenter.login() : null,
+                        child: Text(appLocalizations.logInAction),
+                      ),
               ),
             ],
           ),
