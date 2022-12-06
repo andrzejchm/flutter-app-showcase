@@ -10,7 +10,6 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../mocks/mocks.dart';
 import '../../../test_utils/test_utils.dart';
-import '../../auth/mocks/auth_mocks.dart';
 import '../mocks/app_init_mock_definitions.dart';
 import '../mocks/app_init_mocks.dart';
 
