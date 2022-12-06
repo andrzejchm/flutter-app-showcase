@@ -13,7 +13,7 @@ void main() {
   });
 
   test(
-    'use case executes normally',
+    'use case executes success when correct credentials',
     () async {
       // GIVEN
 
@@ -22,6 +22,19 @@ void main() {
 
       // THEN
       expect(result.isSuccess, true);
+    },
+  );
+
+  test(
+    'use case executes failure when wrong credentials',
+    () async {
+      // GIVEN
+
+      // WHEN
+      final result = await useCase.execute(username: "non-existing-user", password: "non-existing-password");
+
+      // THEN
+      expect(result.isFailure, true);
     },
   );
 
