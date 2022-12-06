@@ -10,6 +10,7 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../mocks/mocks.dart';
 import '../../../test_utils/test_utils.dart';
+import '../../auth/mocks/auth_mocks.dart';
 import '../mocks/app_init_mock_definitions.dart';
 import '../mocks/app_init_mocks.dart';
 
@@ -27,12 +28,13 @@ void main() {
         Stream.fromIterable([const User.anonymous()]),
       );
       when(() => AppInitMocks.appInitUseCase.execute()).thenAnswer((_) => successFuture(unit));
-
+      when(() => navigator.openLogin(any())).thenAnswer((_) => Future.value());
       // WHEN
       await presenter.onInit();
 
       // THEN
       verify(() => AppInitMocks.appInitUseCase.execute());
+      verify(() => navigator.openLogin(any()));
       verify(() => Mocks.userStore.stream);
     },
   );
