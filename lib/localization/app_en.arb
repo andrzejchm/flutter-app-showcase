@@ -2,11 +2,13 @@
   "@@locale": "en",
   "appTitle": "Flutter Demo",
   "okAction": "Ok",
+  "commonSuccessTitle": "Success",
   "commonErrorTitle": "Error",
   "commonErrorMessage": "Something went wrong, please try again",
   "missingCredsTitle": "Missing Credentials",
   "missingCredsMessage": "Please provide both username and password!",
   "usernameHint": "username",
   "passwordHint": "password",
-  "logInAction": "Log in"
+  "logInAction": "Log in",
+  "logInSuccessMessage": "You successfully logged in!"
 }
